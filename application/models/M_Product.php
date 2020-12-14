@@ -6,6 +6,41 @@ class M_Product extends CI_Model {
 		return $result = $this->db->get('products', $limit, $start)->result();
 	}
 
+	public function addCart(){
+		$id = $this->input->post('id');
+		$product = $this->db->get_where('products',['id' => $id])->row();
+		$data = array(
+		                'id'      => $id,
+		                'qty'     => 1,
+		                'price'   => $product->price,
+		                'name'    => $product->name
+		       		);
+
+		$this->cart->insert($data);
+		echo $this->getRows();
+		// return json_encode($data['name']);
+		// redirect('product');
+	}
+
+	public function getRows(){
+		$i=0;
+		foreach ($this->cart->contents() as $value) {
+			$i++;
+		}
+		return $i;
+	}
+
+	public function deal(){
+		$this->db->join('invoices','orders.invoice_id = invoices.id');
+		$this->db->join('products','products.id = orders.product_id');
+		$this->db->order_by('tgl_transaksi','DESC');
+		return $this->db->get('orders')->result();
+	}
+
+	public function image($id){
+		return $this->db->get_where('products',['id' => $id])->result()[0]->image;
+	}
+
 	public function paginationConf(){
 		$config['base_url'] = base_url('product/index');
 		$config['total_rows'] = $this->db->get('products')->num_rows();
@@ -20,6 +55,11 @@ class M_Product extends CI_Model {
 		$this->pagination->initialize($config);
 		return $this->pagination->create_links();
 
+	}
+
+	public function latestProduct($limit, $start){
+		$this->db->order_by('id','DESC');
+		return $result = $this->db->get('products', $limit, $start)->result();
 	}
 
 	public function getPer(){
@@ -37,5 +77,25 @@ class M_Product extends CI_Model {
 	public function getCategory(){
 		return $this->db->get('kategori')->result();
 	}
+
+	public function get($id_kategori){
+		$product = $this->db->get('products')->result();
+		$i=0;
+		foreach($product as $p){
+			if ($p->id_kategori == $id_kategori){
+				$i++;
+			}
+		}
+
+		return $i;
+    }
+    
+    public function selects(){
+        return $this->db
+                    ->join('kategori','kategori.id_kategori = products.id_kategori')
+                    ->order_by('name','ASC')
+                    ->get('products')
+                    ->result();
+    }
 
 }

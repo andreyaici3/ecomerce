@@ -7,13 +7,17 @@ class Product extends CI_Controller {
 		$this->load->model('M_Product');
 		$this->load->library('pagination');
 	}
+
+	public function addCart(){
+		$this->M_Product->addCart();
+	}
+
 	public function index()
-	{
-		
+	{		
 		$data = [
 			'title' 		=> "Produk",
-			'menuAktif' 	=> "Category",
-			'page_header'	=> "Product Page",
+			'menuAktif' 	=> "Produk",
+			'page_header'	=> "Halaman Produk",
 			'category'		=> $this->M_Product->getCategory(),
 			'start'			=> $this->uri->segment(3),
 			'p'				=> $this->M_Product->getPer(),
@@ -35,4 +39,22 @@ class Product extends CI_Controller {
 		];
 		$this->fronted->view("detail", $data);
 	}
+
+	public function category($kategori = null){
+		if (!$kategori){
+			redirect('product');
+		} else {
+			$a = $this->db->get_where('kategori',['nama_kategori' => $kategori])->row()->id_kategori;
+			$b = $this->db->get_where('products',['id_kategori' => $a]);
+			$data = [
+				'title' 		=> "Kategori",
+				'menuAktif' 	=> "Detail Product",
+				'page_header'	=> "Berdasarkan Kategori",
+				'product'		=> $b->result()
+			];
+			$this->fronted->view("kategori", $data);
+		}
+		
+	}
 }
+

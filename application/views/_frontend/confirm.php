@@ -3,36 +3,36 @@
 		<div class="container">
 			<h3 class="title_confirmation">Thank you. Your order has been received.</h3>
 			<div class="row order_d_inner">
-				<div class="col-lg-4">
+				<div class="col-lg-4 mb-4">
 					<div class="details_item">
 						<h4>Order Info</h4>
 						<ul class="list">
-							<li><a href="#"><span>Order number</span> : 60235</a></li>
-							<li><a href="#"><span>Date</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Total</span> : USD 2210</a></li>
+							<li><a href="#"><span>Order number</span> : <?= $order->invoice_id  ?></a></li>
+							<li><a href="#"><span>Date</span> : <?= $order->tgl_transaksi  ?></a></li>
+							<li><a href="#"><span>Total</span> : IDR. <?= number_format($order->total_harga)  ?></a></li>
 							<li><a href="#"><span>Payment method</span> : Check payments</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-4 mb-4">
 					<div class="details_item">
 						<h4>Billing Address</h4>
 						<ul class="list">
-							<li><a href="#"><span>Street</span> : 56/8</a></li>
-							<li><a href="#"><span>City</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Country</span> : United States</a></li>
-							<li><a href="#"><span>Postcode </span> : 36952</a></li>
+							<li><a href="#"><span>Street</span> : <?= $order->street  ?></a></li>
+							<li><a href="#"><span>City</span> : <?= $order->city  ?></a></li>
+							<li><a href="#"><span>Country</span> : <?= $order->country  ?></a></li>
+							<li><a href="#"><span>Postcode </span> : <?= $order->post_code  ?></a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-4 mb-4">
 					<div class="details_item">
 						<h4>Shipping Address</h4>
 						<ul class="list">
-							<li><a href="#"><span>Street</span> : 56/8</a></li>
-							<li><a href="#"><span>City</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Country</span> : United States</a></li>
-							<li><a href="#"><span>Postcode </span> : 36952</a></li>
+							<li><a href="#"><span>Street</span> : <?= $order->street  ?></a></li>
+							<li><a href="#"><span>City</span> : <?= $order->city  ?></a></li>
+							<li><a href="#"><span>Country</span> : <?= $order->country  ?></a></li>
+							<li><a href="#"><span>Postcode </span> : <?= $order->post_code  ?></a></li>
 						</ul>
 					</div>
 				</div>
@@ -49,39 +49,20 @@
 							</tr>
 						</thead>
 						<tbody>
+							<?php foreach ($product as $value): ?>								
 							<tr>
 								<td>
-									<p>Pixelstore fresh Blackberry</p>
+									<p><?= $value->name  ?></p>
 								</td>
 								<td>
-									<h5>x 02</h5>
+									<h5>x <?= $value->qty  ?></h5>
 								</td>
 								<td>
-									<p>$720.00</p>
+									<p>IDR. <?= number_format($value->price*$value->qty)  ?></p>
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<p>Pixelstore fresh Blackberry</p>
-								</td>
-								<td>
-									<h5>x 02</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>Pixelstore fresh Blackberry</p>
-								</td>
-								<td>
-									<h5>x 02</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
+							<?php endforeach ?>
+
 							<tr>
 								<td>
 									<h4>Subtotal</h4>
@@ -90,7 +71,7 @@
 									<h5></h5>
 								</td>
 								<td>
-									<p>$2160.00</p>
+									<p>IDR. <?= number_format($order->total_harga)  ?></p>
 								</td>
 							</tr>
 							<tr>
@@ -101,7 +82,7 @@
 									<h5></h5>
 								</td>
 								<td>
-									<p>Flat rate: $50.00</p>
+									<p>Flat rate: IDR. <?= number_format(18000)  ?></p>
 								</td>
 							</tr>
 							<tr>
@@ -112,7 +93,7 @@
 									<h5></h5>
 								</td>
 								<td>
-									<p>$2210.00</p>
+									<p>IDR. <?= number_format($order->total_harga+18000)  ?></p>
 								</td>
 							</tr>
 						</tbody>

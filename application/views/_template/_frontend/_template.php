@@ -18,9 +18,7 @@
 	<!-- End banner Area -->
 	<?php }else{ ?>
 	<!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
-		<?=@$_banerNA?>
-	</section>
+	
 	<!-- End banner Area -->
 	<?php } ?>
 
@@ -29,7 +27,7 @@
 
 
 	<!-- Start related-product Area -->
-	<?php if (@$menuAktif2 != 'login'): ?>
+	<?php if (@$menuAktif2 != 'login' && @$title != 'User Profile'): ?>
 		<section class="related-product-area section_gap_bottom">
 			<?=@$_related?>
 		</section>
@@ -39,7 +37,7 @@
 
 	<!-- start footer Area -->
 	
-	<footer class="footer-area section_gap">
+	<footer class="footer-area section_gap" style="padding-top: 0 !important; padding-bottom: 20px !important;">
 		<?=@$_footerSection?>
 	</footer>
 	

@@ -52,3 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = 'errno';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['admintokobos'] = 'Redaktur/Admin';
+$route['logintokobos'] = 'Redaktur/Auth';
+$route['authadmin']    = 'Redaktur/Auth/authentication';
+$route['outadmin']     = 'Redaktur/Auth/out';
+
+//halaman admin
+$route['dashboard'] = 'Redaktur/Admin';
+$route['dashboard/produk'] = 'Redaktur/Produk';
+$route['dashboard/produk/add'] = 'Redaktur/Produk/add';
+

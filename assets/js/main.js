@@ -13,8 +13,9 @@ $(document).ready(function(){
     $(".fitscreen").css("height", fitscreen);
 
   //------- Active Nice Select --------//
+    // $('select').niceSelect();
+    $('.sel').select2();
 
-    $('select').niceSelect();
 
 
     $('.navbar-nav li.dropdown').hover(function() {

@@ -3,9 +3,11 @@
 		<div class="col-first">
 			<h1><?=$page_header; ?></h1>
 			<nav class="d-flex align-items-center">
-				<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-				<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
-				<a href="category.html">Fashon Category</a>
+				<a href="<?= base_url() ?>">Home</a>
+				
+					<!-- <span style="margin-left: 5px; margin-right: 5px;" class="lnr lnr-arrow-right"></span> <a href="#"><?= $br?></a> -->
+					<!-- <a href="category.html">Fashon Category</a> -->
+				
 			</nav>
 		</div>
 	</div>
